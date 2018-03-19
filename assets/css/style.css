@@ -129,4 +129,37 @@ ul.list {
   .form-group textarea {
     font-family: arial; }
 
+table.table {
+  width: 100%;
+  border-collapse: collapse; }
+  table.table tbody tr {
+    border-bottom: 1px solid #bdbdbd; }
+    table.table tbody tr td .form-control {
+      border: none; }
+    table.table tbody tr td .X {
+      display: block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 10px;
+      text-align: center;
+      background-color: #aaa;
+      color: white; }
+      table.table tbody tr td .X:hover {
+        background-color: #666;
+        cursor: pointer; }
+    table.table tbody tr:hover {
+      border-bottom-color: black; }
+  table.table tfoot tr td {
+    padding: 10px; }
+
+.add-list-item {
+  color: #888;
+  font-weight: bold; }
+  .add-list-item span {
+    margin-right: 30px 10px 10px; }
+  .add-list-item:hover {
+    cursor: pointer;
+    color: black; }
+
 /*# sourceMappingURL=style.css.map */

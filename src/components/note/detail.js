@@ -45,14 +45,54 @@ class DetailComponent extends Component {
 			})
 		}
 	}
+	_onAddCheckList() {
+		this.props.addCheckList()
+	}
+	_onChangeValueCheckBox(e) {
+		let value = e.target.value;
+		this.props.updateValueCheckBox(value)
+	}
+	_onCheckNote(item, index, idNote) {
+		this.props.checkInCheckList(item, index, idNote)
+	}
+	_onRemoveCheckList(index) {
+		this.props.removeItemCheckList(index);
+	}
 	render() {
 		let {
 			viewDetail: {
 				id, 
 				name, 
-				content
-			}
+				content, 
+				type, 
+			}, 
+			valueCheckBox, 
 		} = this.props;
+		type = type == null ? [] : type;
+		let list_checkbox = type.map((item, index) => {
+			return (
+				<tr key={`note-${id}checkbox-${index}`}>
+					<td width="1">
+						<label className="checkbox">
+							<input 
+								type="checkbox" 
+								onClick={this._onCheckNote.bind(this, item, index, id)} 
+								checked={item.ic == 1 ? true : false} 
+							/>
+							<span></span>
+						</label>
+					</td>
+					<td>
+						<div className="form-group">
+							<span>{item.t}</span>
+						</div>
+					</td>
+					<td width="1"> 
+						<a className="X" onClick={this._onRemoveCheckList.bind(this, index)}>X</a>
+					</td>
+				</tr>
+			)
+		})
 		return (
 			<Modal isActive={this.props.isDetail == true ? true : false}>
 				<div className="modal__header">
@@ -78,6 +118,39 @@ class DetailComponent extends Component {
 							rows="8">
 						</textarea>
 					</div>
+					<table className="table">
+					<tbody>
+						{list_checkbox}
+						<tr>
+							<td width="1">
+								<label className="checkbox">
+									<input type="checkbox" checked="" />
+									<span></span>
+								</label>
+							</td>
+							<td>
+								<div className="form-group">
+									<input 
+										type="text" 
+										className="form-control" 
+										placeholder="Enter item name" 
+										value={valueCheckBox} 
+										onChange={this._onChangeValueCheckBox.bind(this)}
+									/>
+								</div>
+							</td>
+							<td width="1"> 
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colSpan="3">
+								<a className="add-list-item" onClick={this._onAddCheckList.bind(this)}><span>+</span> Add item</a>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
 				</div>
 				<div className="modal__footer">
 					<a className="cancel" onClick={this._onCloseModal.bind(this)}>Cancel</a>
@@ -101,6 +174,7 @@ const mapStateToProps = (state) => {
 	return {
 		isDetail: state.note.isDetail, 
 		viewDetail: state.note.viewDetail, 
+		valueCheckBox: state.note.valueCheckBox, 
 	}
 }
 

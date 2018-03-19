@@ -1,8 +1,11 @@
 const initState = {
 	list: [], 
-	viewDetail: {}, 
+	viewDetail: {
+		type: [], 
+	}, 
 	isDetail: false, 
 	count: 0, 
+	valueCheckBox: '', 
 }
 
 function writeBlog(state = initState, action) {
@@ -38,6 +41,26 @@ function writeBlog(state = initState, action) {
 				...action.payload
 			}
 		case types.EDIT_NOTE:
+			return {
+				...state, 
+				...action.payload
+			}
+		case types.UPDATE_VALUE_CHECKBOX:
+			return {
+				...state, 
+				...action.payload
+			}
+		case types.ADD_CHECK_LIST:
+			return {
+				...state, 
+				...action.payload
+			}
+		case types.CHECK_IN_CHECK_LIST:
+			return {
+				...state, 
+				...action.payload
+			}
+		case types.REMOVE_ITEM_CHECK_LIST:
 			return {
 				...state, 
 				...action.payload
